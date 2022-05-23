@@ -3,7 +3,7 @@
 char kutu[10] = {'o','1','2','3','4','5','6','7','8','9'};
 char oyuncu1[50], oyuncu2[50];
 
-void tahtayiBastir() {
+void tahtaBastir() {
 	
 	// Oyun tahtasýný yazdýrýr.
 	
@@ -24,7 +24,7 @@ void tahtayiBastir() {
 
 int oyunBaslat() {
 	
-	int oyuncu = 1, i, secim;
+	int oyuncuSira = 1, i, secim;
 	char isaret;
 	
 	printf("1.Oyuncu : ");
@@ -34,21 +34,21 @@ int oyunBaslat() {
 
 	do {
 		
-		tahtayiBastir();
+		tahtaBastir();
 		
-		oyuncu = (oyuncu % 2) ? 1 : 2;  // oyuncu deðiþkeninin deðerinin 2 ile bölümünden kalan varsa oyuncu = 1 deðerini alýr, yoksa oyuncu = 2 deðerini alýr.
+		oyuncuSira = (oyuncuSira % 2) ? 1 : 2;  // oyuncu deðiþkeninin deðerinin 2 ile bölümünden kalan varsa oyuncu = 1 deðerini alýr, yoksa oyuncu = 2 deðerini alýr.
 		
-		if(oyuncu == 1) {
+		if(oyuncuSira == 1) {
 		    printf("\n\n%s bir numara sec : ",oyuncu1);
 		    scanf("%d",&secim);
 		}
 		
-		else if(oyuncu == 2) {
+		else if(oyuncuSira == 2) {
 		    printf("\n\n%s bir numara sec : ",oyuncu2);
 	 	    scanf("%d",&secim);
 		}
 			
-		isaret = (oyuncu == 1) ? 'X' : 'O';
+		isaret = (oyuncuSira == 1) ? 'X' : 'O';
 		
 		// Girilen sayýnýn olduðu kutuda girilen sayý karakteri varsa yani X veya O yoksa hangi oyuncunun hamlesi olduðuna baðlý olarak X veya O yerleþtirilir.
 			
@@ -82,22 +82,22 @@ int oyunBaslat() {
 			else {
 			   printf("\n>> HATALI SECIM!\n>> DOGRU SAYI GIRDIGINIZDEN EMIN OLUN!\n");
 			   
-			   oyuncu--;  // Hatalý seçim yapýldýðýnda ayný oyuncunun tekrar oynayabilmesi için oyuncu deðiþkeni 1 azaltýlýr.
+			   oyuncuSira--;  // Hatalý seçim yapýldýðýnda ayný oyuncunun tekrar oynayabilmesi için oyuncu deðiþkeni 1 azaltýlýr.
 		}
 		
 		i = kazananKontrol();
 		
-		oyuncu++;  // Sýradaki oyuncuya geçmek için oyuncu deðiþkeni 1 arttýrýlýr.
+		oyuncuSira++;  // Sýradaki oyuncuya geçmek için oyuncu deðiþkeni 1 arttýrýlýr.
 }
 
     while(i == -1);
     
-    tahtayiBastir();
+    tahtaBastir();
     
-		if(i == 1 && oyuncu - 1 == 1)
+		if(i == 1 && oyuncuSira - 1 == 1)
 		    printf("\n>> %s OYUNU KAZANDI",oyuncu1);
 		    
-		else if(i == 1 && oyuncu - 1 == 2)
+		else if(i == 1 && oyuncuSira - 1 == 2)
 		    printf("\n>> %s OYUNU KAZANDI",oyuncu2);
 		    
 		else if(i == 0)
@@ -150,12 +150,12 @@ int main() {
 	
 	oyunBaslat();
 	
-	char tekrar;
+	char oyunTekrar;
 	
 	printf("\nTekrar oynamak ister misiniz? (E/H) : ");
-	scanf("%s",&tekrar);
+	scanf("%s",&oyunTekrar);
 	
-	if(tekrar == 'E') {
+	if(oyunTekrar == 'E') {
 		
 		do {
 			
@@ -163,14 +163,14 @@ int main() {
 		    oyunBaslat();
 		
             printf("\nTekrar oynamak ister misiniz? (E/H) : ");
-	        scanf("%s",&tekrar);
+	        scanf("%s",&oyunTekrar);
 } 
 
-    while(tekrar == 'E');
+    while(oyunTekrar == 'E');
 
 }
 
-    else if(tekrar == 'H')
+    else if(oyunTekrar == 'H')
       printf("IYI GUNLER :)");
 		    
     return 0;
